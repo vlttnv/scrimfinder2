@@ -1,7 +1,7 @@
 from migrate.versioning import api
 from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
-from scrim2 import db
+from scrim2.app import db
 import os.path
 
 db.create_all()

@@ -1,6 +1,6 @@
 import imp
 from migrate.versioning import api
-from scrim2 import db
+from scrim2.extensions import db
 from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
 
