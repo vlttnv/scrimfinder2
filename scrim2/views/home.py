@@ -3,7 +3,7 @@ from datetime import datetime as dt
 from scrim2.extensions import oid, db, lm
 from scrim2.models import User
 from sqlalchemy.orm.exc import NoResultFound
-from flask.ext.login import login_user, logout_user
+from flask.ext.login import login_user, logout_user, current_user
 import requests, re
 
 
@@ -11,6 +11,8 @@ home_bp = Blueprint('home_bp', __name__)
 
 @home_bp.route('/')
 def index():
+    if current_user.is_authenticated():
+        return redirect(url_for('live_bp.live'))
     return render_template('/home/index.html')
 
 @home_bp.route('/login')

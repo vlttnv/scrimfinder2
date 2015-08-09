@@ -1,5 +1,8 @@
 from flask import Flask, g, session, url_for, redirect
 from .views.home import home_bp
+from .views.live import live_bp
+from .views.profile import profile_bp
+from .views.teams import teams_bp
 from scrim2.extensions import db, lm, oid
 from scrim2.models import User
 
@@ -18,6 +21,9 @@ def create_app():
 
 def config_blueprints(the_app):
     the_app.register_blueprint(home_bp)
+    the_app.register_blueprint(live_bp)
+    the_app.register_blueprint(profile_bp)
+    the_app.register_blueprint(teams_bp)
 
 def config_extensions(the_app):
     db.init_app(the_app)
