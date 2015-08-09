@@ -1,8 +1,4 @@
 from scrim2 import create_app
-from tornado.web import Application, FallbackHandler
-from tornado.websocket import WebSocketHandler
-from tornado.ioloop import IOLoop
-from tornado.wsgi import WSGIContainer
 from scrim2.extensions import db
 import sys, os.path
 import imp
@@ -18,12 +14,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         sys.exit(1)
     elif sys.argv[1] == 'run':
-        container = WSGIContainer(scrim2_app)
-        server = Application([
-            (r'.*', FallbackHandler, dict(fallback=container))
-            ], debug=True)
-        server.listen(8080)
-        IOLoop.instance().start()
+        scrim2_app.run(debug=True, host='0.0.0.0')
     elif sys.argv[1] == 'db_create':
         with scrim2_app.app_context():
             db.create_all()

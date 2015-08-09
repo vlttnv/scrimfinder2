@@ -6,4 +6,13 @@
 {% else %}
 <a href="{{url_for('home_bp.login')}}">LOGIN</a>
 {% endif %}
+<div class="container">
+      <p>Send a message:</p>
+      <input id="message" type="text">
+      <button id="submit" type="button" onclick="submit()">Submit</button>
+      <p>Messages received:</p>
+</div>
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/live.js')}}"></script>
 {% endblock %}
