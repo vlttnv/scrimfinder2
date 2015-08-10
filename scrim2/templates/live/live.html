@@ -1,18 +1,17 @@
 {% extends "home/layout.html" %}
 {% block body %}
-<h1>Live Page</h1>
-{% if current_user.is_authenticated() %}
-<a href="{{url_for('home_bp.logout')}}">LOGOUT</a>
-{% else %}
-<a href="{{url_for('home_bp.login')}}">LOGIN</a>
-{% endif %}
 <div class="container">
+    <h1>Live Page</h1>
       <p>Send a message:</p>
       <input id="message" type="text">
       <button id="submit" type="button" onclick="submit()">Submit</button>
       <p>Messages received:</p>
 </div>
 
+
+{% endblock %}
+{% block after_body %}
+{{ super() }}
 
 <script type="text/javascript" src="{{url_for('static', filename='js/live.js')}}"></script>
 {% endblock %}

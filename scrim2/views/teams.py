@@ -12,7 +12,7 @@ def team(id):
 @teams_bp.route('/teams', methods=['GET', 'POST'])
 @teams_bp.route('/teams/page/<int:page>', methods=['GET', 'POST'])
 @login_required
-def teams_all(page=1):
+def teams(page=1):
     return render_template('teams/teams.html')
 
 @teams_bp.route('/team/new', methods=['GET', 'POST'])

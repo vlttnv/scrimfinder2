@@ -17,3 +17,10 @@
     top: 10%;
   }
 }
+
+.cent {
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+

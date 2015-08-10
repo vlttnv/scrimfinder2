@@ -14,7 +14,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         sys.exit(1)
     elif sys.argv[1] == 'run':
-        scrim2_app.run(debug=True, host='0.0.0.0')
+        scrim2_app.run(debug=True, threaded=True, host='0.0.0.0')
     elif sys.argv[1] == 'db_create':
         with scrim2_app.app_context():
             db.create_all()

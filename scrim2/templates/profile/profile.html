@@ -1,9 +1,48 @@
 {% extends "home/layout.html" %}
 {% block body %}
-<h1>Profile page</h1>
-{% if current_user.is_authenticated() %}
-<a href="{{url_for('home_bp.logout')}}">LOGOUT</a>
-{% else %}
-<a href="{{url_for('home_bp.login')}}">LOGIN</a>
-{% endif %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col s4">
+            <div class="card-panel main-blue">
+                    <img src="{{u.avatar_url_full}}" style="display: block; margin-left: auto; margin-right: auto;" class="circle responsive-img">
+                    <h5 class="center-align main-grey-text">{{u.nickname}}</h5>
+                    <ul class="collection with-header">
+                        <li class="collection-item"><div>Main Class<a href="#!" class="secondary-content">{{u.main_class}} </a></div></li>
+                        <li class="collection-item"><div>Skill Level<a href="#!" class="secondary-content">{{u.skill_level}}</a></div></li>
+                        <li class="collection-item"><div>Join Date<a href="#!" class="secondary-content">{{u.join_date}}</a></div></li>
+                        <li class="collection-item"><div>Is Merc<a href="#!" class="secondary-content">{{u.is_merc}}</a></div></li>
+                    </ul>
+                    <a class="waves-effect waves-light btn main-b"><i class="material-icons left center-align">add</i>Message</a>
+
+                </div>
+            </div>
+
+        <div class="col s8">
+            <div class="card panel">
+                <div class="col s12">
+                    <div clas="row">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a class="active" href="#test1">Teams</a></li>
+                        <li class="tab col s3"><a  href="#test2">Info</a></li>
+                    </ul>
+                </div>
+                <div id="test1" class="col s12">
+                    <ul class="collection">
+                        <li class="collection-item avatar" style="padding-left:6px">
+                        <span class="title">Title</span>
+                        <p>First Line <br>
+                        Second Line
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i> <i class="material-icons">grade</i> </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="test2" class="col s12">Info</div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
