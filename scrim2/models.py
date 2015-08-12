@@ -12,6 +12,9 @@ class User(db.Model):
     is_merc                 = db.Column(db.Integer)
     last_updated            = db.Column(db.String(45))
     skill_level             = db.Column(db.String(80))
+    main_class              = db.Column(db.String(45))
+    note                    = db.Column(db.Text)
+    region                  = db.Column(db.String(45))
 
     # Relationship
     memberships             = db.relationship('Membership',

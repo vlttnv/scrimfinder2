@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/test.css')}}"  media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"  media="screen,projection"/>
 <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}"  media="screen,projection"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 {% block nav %}
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="{{url_for('profile_bp.my_profile')}}">View</a></li>
-  <li class="divider"></li>
-  <li><a href="{{url_for('home_bp.logout')}}"> Logout</a></li>
-</ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo">scrim.me</a>
-    <a href="#" data-activates="mob" class="button-collapse"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
-      <li {% if request.path == "/live" %} class="active"{% endif %} ><a href="{{url_for('live_bp.live')}}"><i class="material-icons left">settings_remote</i>Live</a></li>
-      <li {% if request.path == "/teams" %} class="active"{% endif %} ><a href="{{url_for('teams_bp.teams')}}"><i class="material-icons left">supervisor_account</i>Teams</a></li>
-      <li {% if request.path == "/users" %} class="active"{% endif %} ><a href="#!"><i class="material-icons left">recent_actors</i>Players</a></li>
-      <li>
-      <a class="dropdown-button" style="height: 64px;" href="#!" data-activates="dropdown1"><img style="width: 64px" src="{{g.user.avatar_url_full}}" ><i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  <ul id="mob" class="side-nav">
-      <li><a href="sass.html">Live</a></li>
-      <li><a href="badges.html">Teams</a></li>
-      <li><a href="collapsible.html">Players</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#!">one</a></li>
-      <li><a href="#!">two</a></li>
-      <li class="divider"></li>
-      <li><a href="#!">three</a></li>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">scrim.me V2</a>
+    </div>
 
-    </ul>
-
-  </div>
-</nav>
-        
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{url_for('live_bp.live')}}"><i class="fa fa-bolt"></i> Live <span class="sr-only">(current)</span></a></li>
+        <li><a href="{{url_for('teams_bp.teams')}}"><i class="fa fa-users"></i> Teams</a></li>
+        <li><a href=""><i class="fa fa-user"></i> Players</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-steam-square"></i><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{url_for('profile_bp.my_profile')}}"><i class="fa fa-eye"></i> Profile</a></li>
+            <li><a href="{{url_for('profile_bp.profile_edit')}}"><i class="fa fa-pencil-square-o"></i> Edit</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{url_for('home_bp.logout')}}"><i class="fa fa-sign-out"></i> Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>        
 {% endblock %}
 {% block body %}
 
@@ -50,39 +56,16 @@
 
 {% block after_body %}
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="{{url_for('static', filename='js/materialize.min.js')}}"></script>
-<script type="text/javascript" src="{{url_for('static', filename='js/init.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 {% endblock %}
 
 {% block footer %}
-<!--
-<footer class="page-footer">
+<footer class="footer">
   <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Footer Content</h5>
-        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-      </div>
-      
-      <div class="col l4 offset-l2 s12">
-        <h5 class="white-text">Links</h5>
-        <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
-    <div class="container">
-      2015 scrim.me
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-    </div>
+    <p class="text-muted">Place sticky footer content here.</p>
   </div>
 </footer>
--->
 {% endblock %}
 </body>
 </html>

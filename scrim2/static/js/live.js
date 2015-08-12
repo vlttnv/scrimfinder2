@@ -1,19 +1,6 @@
-var socket = null;
-$(document).ready(function() {
-    socket = new WebSocket("ws://" + document.domain + ":8080/websocket/");
+var socket = io("128.199.45.141:8080");
 
-    socket.onopen = function() {
-  socket.send("Joined");
-    }
+socket.emit('auth', document.getElementById('nick').value);
 
-    socket.onmessage = function(message) {
-  var txt = message.data;
-  $(".container").append("<p>" + txt + "</p>");
-    }
-});
 
-function submit() {
-    var text = $("input#message").val();
-    socket.send(text);
-    $("input#message").val('');
-}
+

@@ -3,6 +3,7 @@ from flask.ext.login import login_required
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from scrim2.models import User
 from scrim2.extensions import db
+from scrim2.forms import EditUserForm
 
 profile_bp = Blueprint('profile_bp', __name__)
 
@@ -12,6 +13,7 @@ def my_profile():
     return redirect(url_for('profile_bp.profile', steam_id=g.user.steam_id))
 
 @profile_bp.route('/profile/<steam_id>')
+@login_required
 def profile(steam_id):
     try:
         u = User.query.filter_by(steam_id=steam_id).one()
@@ -20,6 +22,21 @@ def profile(steam_id):
     except NoResultFound:
         return "no", 404
 
-@profile_bp.route('/profile/<steam_id>/edit', methods=['GET', 'POST'])
-def profile_edit(steam_id):
-    return render_template('/profile/profile_edit.html')
+@profile_bp.route('/profile/edit', methods=['GET', 'POST'])
+@login_required
+def profile_edit():
+
+    form = EditUserForm()
+
+    if form.validate_on_submit():
+        g.user.skill_level = form.skill_level.data
+        g.user.main_class = form.main_class.data
+        db.session.add(g.user)
+        db.session.commit()
+        # flash()
+        return redirect(url_for('profile_bp.my_profile'))
+    else:
+        form.main_class.data = g.user.main_class
+        form.skill_level.data = g.user.skill_level
+        return render_template('/profile/profile_edit.html', form=form)
+

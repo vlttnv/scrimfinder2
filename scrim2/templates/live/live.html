@@ -13,5 +13,9 @@
 {% block after_body %}
 {{ super() }}
 
+<form style="display: none;">
+<input type="hidden" id="nick" name="nick" value="{{g.user.id}}">
+<input type="hidden" id="rv" name="rv" value="123">
+</form>
 <script type="text/javascript" src="{{url_for('static', filename='js/live.js')}}"></script>
 {% endblock %}
