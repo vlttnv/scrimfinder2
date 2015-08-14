@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, g, redirect
 from flask.ext.login import login_required
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from scrim2.models import User
-from scrim2.extensions import db
+from scrim2.extensions import db, rds
 from scrim2.forms import EditUserForm
 
 profile_bp = Blueprint('profile_bp', __name__)
@@ -17,8 +17,10 @@ def my_profile():
 def profile(steam_id):
     try:
         u = User.query.filter_by(steam_id=steam_id).one()
+        status = rds.get(u.id)
         return render_template('/profile/profile.html',
-                u=u)
+                u=u,
+                status=status)
     except NoResultFound:
         return "no", 404
 

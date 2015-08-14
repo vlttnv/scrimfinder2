@@ -1,11 +1,49 @@
 {% extends "home/layout.html" %}
 {% block body %}
 <div class="container">
-    <h1>Live Page</h1>
-      <p>Send a message:</p>
-      <input id="message" type="text">
-      <button id="submit" type="button" onclick="submit()">Submit</button>
-      <p>Messages received:</p>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="well" id="main_box">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a aria-expanded="true" href="#live" data-toggle="tab">Live Scrims</a></li>
+                    <li><a aria-expanded="false" href="#chat" data-toggle="tab">Profile</a></li>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active in" id="live">
+                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                    </div>
+                    <div class="tab-pane fade" id="chat" stlye="overflow-y: scroll;">
+                        <ul id="messages"></ul>
+                        <form id="form" action="">
+                            <input class="form-control" autocomplete="off" id="inputmsg" type="text">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-globe"></i> Online Players</div>
+                <div class="list-group" id="user_box">
+                    <!--
+                    <a class="list-group-item active" href="#">
+                        <img src="{{g.user.avatar_url}}">
+                        Cras justo odio
+                    </a>
+                    <a class="list-group-item" href="#">
+                        Dapibus ac facilisis in
+                    </a>
+                    <a class="list-group-item" href="#">
+                        Morbi leo risus
+                    </a>
+                    -->
+
+                </div>
+            </div> 
+        </div>
+    </div>
 </div>
 
 
@@ -14,8 +52,14 @@
 {{ super() }}
 
 <form style="display: none;">
-<input type="hidden" id="nick" name="nick" value="{{g.user.id}}">
-<input type="hidden" id="rv" name="rv" value="123">
+<input type="hidden" id="id" name="id" value="{{g.user.id}}">
+<input type="hidden" id="rv" name="rv" value="{{token}}">
+<input type="hidden" id="nick" name="nick" value="{{g.user.nickname}}">
+<input type="hidden" id="avatar" name="avatar" value="{{g.user.avatar_url}}">
+<input type="hidden" id="sid" name="sid" value="{{g.user.steam_id}}">
+
+
+
 </form>
 <script type="text/javascript" src="{{url_for('static', filename='js/live.js')}}"></script>
 {% endblock %}

@@ -17,8 +17,8 @@
                         Skill Level
                         </li>
                         <li class="list-group-item">
-                        <span class="badge">{{u.join_date}}</span>
-                        Join Date
+                        <span style="float: right;" class="label label-{% if status=="online" %}success{% else %}default{% endif %}">{{status}}</span>
+                        Status
                         </li>
                     </ul>
                     <a class="btn btn-success btn-block" href="#"><i class="fa fa-envelope-o"></i> Message</a>

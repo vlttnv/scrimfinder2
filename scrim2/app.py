@@ -3,7 +3,7 @@ from .views.home import home_bp
 from .views.live import live_bp
 from .views.profile import profile_bp
 from .views.teams import teams_bp
-from scrim2.extensions import db, lm, oid
+from scrim2.extensions import db, lm, oid, rds
 from scrim2.models import User
 
 def create_app():
@@ -29,6 +29,7 @@ def config_extensions(the_app):
     db.init_app(the_app)
     lm.init_app(the_app)
     oid.init_app(the_app)
+    rds.init_app(the_app)
 
 def config_befores(the_app):
     @the_app.before_request
