@@ -73,7 +73,11 @@ io.on('connection', function(socket){
 
 
     socket.on('send_msg', function(private_id, msg){
-      socket.to(user_socket[private_id].id).emit('my_message', msg);
+      the_msg = {};
+      the_msg.txt = msg;
+      the_msg.id = usr.id;
+      console.log(the_msg.txt);
+      socket.to(user_socket[private_id].id).emit('my_message', JSON.stringify(the_msg));
       console.log(user_socket[private_id].id);
     });
 
